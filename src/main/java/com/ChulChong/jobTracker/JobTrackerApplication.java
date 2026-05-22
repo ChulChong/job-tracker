@@ -1,4 +1,4 @@
-package com.ChulChong.jobTracker.domain;
+package com.ChulChong.jobTracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

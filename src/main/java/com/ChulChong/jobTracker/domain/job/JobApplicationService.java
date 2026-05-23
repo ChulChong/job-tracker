@@ -1,6 +1,7 @@
 package com.ChulChong.jobTracker.domain.job;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,9 +25,16 @@ public class JobApplicationService {
         jr.save(job);
     }
 
+    @Transactional
     public void delete(long id) {
         JobApplication job = jr.findById(id).orElseThrow(() -> new RuntimeException("Not Found"));
         job.setIsDeleted(true);
-        jr.save(job);
+    }
+
+    @Transactional
+    public void update(long id, JobApplication updatedJob){
+        JobApplication job = jr.findById(id).orElseThrow(() -> new RuntimeException("Not Found"));
+        job.setCompanyName(updatedJob.getCompanyName());
+        job.setPosition(updatedJob.getPosition());
     }
 }

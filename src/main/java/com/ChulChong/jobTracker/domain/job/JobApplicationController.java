@@ -1,5 +1,6 @@
 package com.ChulChong.jobTracker.domain.job;
 
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +50,17 @@ public class JobApplicationController {
         try {
             JobApplication response = js.findById(id);
             return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> putById(@PathVariable long id, @RequestBody JobApplication updatedJob) {
+        try {
+            js.update(id, updatedJob);
+            return ResponseEntity.noContent().build();
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
